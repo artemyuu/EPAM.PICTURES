@@ -1,0 +1,77 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@{
+    int rowsOnPage = 2;
+    int colsInRow = 3;
+    int idx = 0;
+    Publication[] publications = null;
+
+    try
+    {
+        Layout = "~/Layouts/_BasicLayout.cshtml";
+        PageData["pageName"] = "Home";
+
+        if (User.Identity.IsAuthenticated)
+        {
+            int id = 0;
+            Int32.TryParse(User.Identity.Name, out id);
+            PageData["authUser"] = DependencyResolver.Instance.UserLogic.GetUserById(id);
+        }
+
+        int page = 1;
+        if (Request["page"] != null)
+        {
+            Int32.TryParse(Request["page"], out page);
+        }
+        var publicationsOnPage = DependencyResolver.Instance.PublicationLogic.GetByPage(page);
+        publications = (new List<Publication>(publicationsOnPage)).ToArray();
+    }
+    catch(Exception e)
+    {
+        Response.Redirect("/Error?msg=" + e.Message);
+    }
+}
+
+@section Style {
+    <link href="~/Content/CSS/Home.css" rel="stylesheet" />
+}
+
+@section Header {
+    @RenderPage("~/Particals/_Header.cshtml")
+}
+
+<main>
+    <div class="mt-4 container-fluid d-grid gap-4">
+
+        @for (int i = 0; i < rowsOnPage; i++)
+        {
+            <div class="row">
+                @for (int j = 0; j < colsInRow; j++)
+                {
+                    if (idx > publications.Length - 1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        PageData["Publication"] = publications[idx];
+                        <div class="col">
+                            @RenderPage("~/Particals/_PostCard.cshtml")
+                        </div>
+                        idx += 1;
+                    }
+                }
+            </div>
+        }
+    </div>
+    @RenderPage("~/Particals/_PaginationBar.cshtml")
+</main>
+@if (User.Identity.IsAuthenticated)
+{
+    @RenderPage("~/Particals/_AddNewPostButton.cshtml")
+
+}
+@RenderPage("~/Particals/_AddNewPostModal.cshtml")
+@RenderPage("~/Particals/_AuthModal.cshtml")
+@RenderPage("~/Particals/_RegistrationModal.cshtml")
+

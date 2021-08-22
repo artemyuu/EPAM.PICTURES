@@ -1,0 +1,93 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@{
+    Layout = "~/Layouts/_BasicLayout.cshtml";
+    PageData["pageName"] = "Home";
+
+
+    int rowsOnPage = 3;
+    int colsInRow = 3;
+    int idx = 0;
+    Publication[] publications = null;
+
+    try
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            int id = 0;
+            Int32.TryParse(User.Identity.Name, out id);
+            PageData["authUser"] = DependencyResolver.Instance.UserLogic.GetUserById(id);
+        }
+
+        string title = "";
+        if (Request["Title"] != null)
+        {
+            title = Request["Title"];
+        }
+        var searchBublications = DependencyResolver.Instance.PublicationLogic.GetByTitle(title);
+        publications = (new List<Publication>(searchBublications)).ToArray();
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("/Error?msg=" + e.Message);
+    }
+
+}
+
+@section Style {
+    <link href="~/Content/CSS/Home.css" rel="stylesheet" />
+}
+
+@section Header {
+    @RenderPage("~/Particals/_Header.cshtml")
+}
+
+<main>
+    @if (publications.Length > 0)
+    {
+        <div class="container-fluid">
+            <h3>Найдено: @publications.Length публикаций</h3>
+            <hr />
+        </div>
+
+        <div class="mt-4 container-fluid d-grid gap-4">
+
+            @for (int i = 0; i < rowsOnPage; i++)
+            {
+                <div class="row">
+                    @for (int j = 0; j < colsInRow; j++)
+                    {
+                        if (idx > publications.Length - 1)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            PageData["Publication"] = publications[idx];
+                            <div class="col">
+                                @RenderPage("~/Particals/_PostCard.cshtml")
+                            </div>
+                            idx += 1;
+                        }
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="container-fluid">
+            <h3>Публикаций не найдено</h3>
+            <hr />
+        </div>
+    }
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @RenderPage("~/Particals/_AddNewPostButton.cshtml")
+
+    }
+</main>
+@RenderPage("~/Particals/_AddNewPostModal.cshtml")
+@RenderPage("~/Particals/_AuthModal.cshtml")
+@RenderPage("~/Particals/_RegistrationModal.cshtml")

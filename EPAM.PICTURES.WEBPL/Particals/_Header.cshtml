@@ -1,0 +1,26 @@
+﻿<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid justify-content-between">
+            <a class="navbar-brand fs-2" href="#">Pictures</a>
+            <form action="~/Pages/Search.cshtml"class="d-flex">
+                <input class="form-control me-2"
+                       required
+                       type="search"
+                       placeholder="Search"
+                       name="Title"
+                       aria-label="Search" />
+                <button class="btn btn-outline-dark" type="submit">
+                    <i data-feather="search"></i>
+                </button>
+            </form>
+            @if(User.Identity.IsAuthenticated){
+                @RenderPage("~/Particals/_AuthUserPanel.cshtml");
+            }
+            else {
+            <div>
+                <a class="navbar-brand" href="#" data-bs-toggle="modal" data-bs-target="#authModal">Sing In</a>
+            </div>
+            }
+        </div>
+    </nav>
+</header>

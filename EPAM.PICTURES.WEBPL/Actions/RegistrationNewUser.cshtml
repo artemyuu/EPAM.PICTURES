@@ -1,0 +1,34 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@using System.Threading
+@{
+    try
+    {
+        var fileImage = Request.Files["Image"];
+        var imgPath = DependencyResolver.Instance.FileSaverLogic.Save(fileImage);
+
+        DependencyResolver.Instance.UserLogic.CreateUser(
+            new User(
+                Request["Name"],
+                Request["Surname"],
+                Request["Email"],
+                Request["Username"],
+                Request["Password"],
+                0,
+                DateTime.Parse(Request["DateOfBirth"]),
+                DateTime.Now,
+                imgPath
+             )
+           );
+        Response.Redirect("/");
+    }
+    catch (ThreadAbortException e)
+    {
+        // Do nothing
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("../Pages/Error?msg=" + e.Message, false);
+    }
+
+}

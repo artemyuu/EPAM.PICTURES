@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      p {
+        text-align: justify;
+      }
+    </style>
+    <!-- <style>
+      .active-page {
+        background-color: black;
+        color: white !important;
+      }
+      .card {
+        overflow: hidden;
+      }
+      .card img {
+        transition: all 0.7s;
+      }
+      .card h5 {
+        opacity: 0;
+        transition: all 0.7s;
+      }
+      .card span {
+        opacity: 0;
+        transition: all 0.7s;
+      }
+      .card:hover {
+        cursor: pointer;
+      }
+      .card:hover h5 {
+        opacity: 1;
+      }
+      .card:hover span {
+        opacity: 1;
+      }
+      .card:hover img {
+        filter: brightness(0.5);
+        transform: scale(1.2);
+      }
+    </style> -->
+
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid justify-content-between">
+          <a class="navbar-brand fs-2" href="#">Pictures</a>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-dark" type="submit">
+              <i data-feather="search"></i>
+            </button>
+          </form>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse flex-grow-0"
+            id="navbarNavAltMarkup"
+          >
+            <div class="navbar-nav flex-row justify-content-around">
+              <button class="btn border-0 rounded btn-outline-dark me-2 p-1">
+                <i data-feather="home"></i>
+              </button>
+              <button class="btn border-0 rounded btn-outline-dark me-5 p-1">
+                <i data-feather="heart"></i>
+              </button>
+              <a class="navbar-brand d-flex align-items-center" href="#">
+                <img
+                  class="rounded-circle me-1"
+                  src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg"
+                  alt=""
+                  width="30"
+                  height="30"
+                  class="d-inline-block align-text-top"
+                />
+                <span class="navbar-brand">Artem</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </body>
+
+  <main>
+    <div class="container p-5">
+      <div class="container-fluid d-flex flex-row">
+        <img
+          class="rounded-circle me-3"
+          src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg"
+          alt=""
+          width="150"
+          height="150"
+          class="d-inline-block align-text-top"
+        />
+        <div>
+          <div class="d-flex align-items-center">
+            <span class="navbar-brand fs-1">Artem</span>
+            <i data-feather="edit"></i>
+          </div>
+          
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5>Публикации: 28</h5>
+            </div>
+            <div>
+              <h5>Подписки: 28</h5>
+            </div>
+            <div>
+              <h5>Подписчики: 28</h5>
+            </div>
+          </div>
+          <hr>
+          <h4 class="p-0">Артем Шумилин</h4>
+          <p class="py-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Consequuntur harum quasi labore, recusandae officiis architecto
+            dolor nobis, minus aliquid assumenda ipsam soluta necessitatibus
+            vitae amet! Cupiditate quasi nostrum iusto aut?
+          </p>
+          
+        </div>
+        <!-- <div class="d-flex align-items-center ms-3">
+          <i data-feather="heart" width="52" height="52"></i>
+          <span class="fs-2">12</span>
+        </div> -->
+      </div>
+      <hr />
+      <div>
+        <div class="mt-4 container-fluid d-grid gap-4">
+          <div class="row">
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img">
+                <div class="card-img-overlay d-flex flex-column justify-content-between">
+                  <h5 class="card-title fs-1">Card title</h5>
+                  <div class="d-flex justify-content-between">
+                    <span>12 <i data-feather="heart"></i></span></i>
+                    <span>10 <i data-feather="message-circle"></i></span></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card bg-dark text-white">
+                <img src="https://icdn.lenta.ru/images/2021/03/10/14/20210310142047815/square_320_b00b563bf6002c5a8a025f7c4f0f38a6.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    feather.replace();
+  </script>
+</html>
+
+<!-- AUTH <main>
+  <div
+    style="width: 30%; height: 50%; margin-top: 10%"
+    class="container-fluid border p-3 shadow"
+  >
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+        <small id="emailHelp" class="form-text text-muted"
+          >We'll never share your email with anyone else.</small
+        >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <a href="">Registration</a>
+      <button
+        style="height: 3.5em"
+        type="submit"
+        class="btn mt-3 w-100 btn-dark"
+      >
+        Sign In
+      </button>
+    </form>
+  </div>
+</main> -->
+
+<!-- 
+<main>
+  <div
+    style="width: 30%; height: 50%; margin-top: 10%"
+    class="container-fluid border p-3 shadow"
+  >
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+        <small id="emailHelp" class="form-text text-muted"
+          >We'll never share your email with anyone else.</small
+        >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Username</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Name</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Surname</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Date of Birth</label>
+        <input
+          type="date"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+
+      <button
+        style="height: 3.5em"
+        type="submit"
+        class="btn mt-3 w-100 btn-dark"
+      >
+        Registration
+      </button>
+    </form>
+  </div>
+</main> -->

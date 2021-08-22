@@ -1,0 +1,48 @@
+﻿.active-page {
+    background-color: black;
+    color: white !important;
+}
+
+.card {
+    overflow: hidden;
+    display: flex;
+    align-content: space-between;
+    justify-content: space-around;
+    min-height: 350px;
+}
+
+.card img {
+    transition: all 0.7s;
+}
+
+.card-img {
+    max-height: 350px;
+    object-fit: contain;
+}
+
+.card h5 {
+    opacity: 0;
+    transition: all 0.7s;
+}
+
+.card span {
+    opacity: 0;
+    transition: all 0.7s;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card:hover h5 {
+    opacity: 1;
+}
+
+.card:hover span {
+    opacity: 1;
+}
+
+.card:hover img {
+    filter: brightness(0.5);
+    transform: scale(1.2);
+}

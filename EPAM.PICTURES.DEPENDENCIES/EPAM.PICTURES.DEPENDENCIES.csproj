@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B238D089-DD15-4618-9077-BF22E9BBF70A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EPAM.PICTURES.DEPENDENCIES</RootNamespace>
+    <AssemblyName>EPAM.PICTURES.DEPENDENCIES</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EPAM.PICTIRES.FILE_DAL.INTERFACES\EPAM.PICTURES.FILE_DAL.INTERFACES.csproj">
+      <Project>{CB646571-AB5D-4381-B46F-0FF9FCD16B41}</Project>
+      <Name>EPAM.PICTURES.FILE_DAL.INTERFACES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPAM.PICTURES.BLL.INTERFACES\EPAM.PICTURES.BLL.INTERFACES.csproj">
+      <Project>{3cd2e3e3-30b7-4f9c-8b56-15f8d6f23872}</Project>
+      <Name>EPAM.PICTURES.BLL.INTERFACES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPAM.PICTURES.BLL\EPAM.PICTURES.BLL.csproj">
+      <Project>{1f271379-46ac-47ac-9efc-c3d422d9a982}</Project>
+      <Name>EPAM.PICTURES.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPAM.PICTURES.DAL.INTERFACES\EPAM.PICTURES.DAL.INTERFACES.csproj">
+      <Project>{1434e6cc-2fb4-44f2-8c86-3fd8561bd38e}</Project>
+      <Name>EPAM.PICTURES.DAL.INTERFACES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPAM.PICTURES.DAL\EPAM.PICTURES.DAL.csproj">
+      <Project>{121cdcff-0c46-470f-bead-23d748c05480}</Project>
+      <Name>EPAM.PICTURES.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPAM.PICTURES.FILE_DAL\EPAM.PICTURES.FILE_DAL.csproj">
+      <Project>{6DE3B25E-0B70-4A84-A734-1AB041A2A6A4}</Project>
+      <Name>EPAM.PICTURES.FILE_DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

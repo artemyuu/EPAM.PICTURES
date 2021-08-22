@@ -1,0 +1,68 @@
+﻿<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Authorisation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="~/Actions/RegistrationNewUser.cshtml" enctype='multipart/form-data' method="post">
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email"
+                               class="form-control"
+                               name="Email"
+                               required
+                               aria-describedby="emailHelp" />
+                        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text"
+                               required
+                               class="form-control"
+                               name="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password"
+                               class="form-control"
+                               required
+                               name="Password" />
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text"
+                               class="form-control"
+                               required
+                               name="Name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Surname</label>
+                        <input type="text"
+                               class="form-control"
+                               required
+                               name="Surname" />
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date"
+                               class="form-control"
+                               required
+                               name="DateOfBirth" />
+                    </div>
+                    <div class="form-group">
+                        <label>Your image</label>
+                        <input name="Image" class="form-control" required type="file">
+                    </div>
+                    <button style="height: 3.5em"
+                            type="submit"
+                            class="btn mt-3 w-100 btn-dark">
+                        Registration
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

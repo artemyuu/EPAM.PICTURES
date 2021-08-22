@@ -1,0 +1,94 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+
+@{
+    string classLike = "";
+    if (User.Identity.IsAuthenticated)
+    {
+        bool checkLike = DependencyResolver.Instance.PublicationLogic.CheckLikePublication(PageData["Publication"].Id, PageData["authUser"].Id);
+        if (checkLike)
+        {
+            classLike = "clicked-like";
+        }
+    }
+
+    int countPublcaitonLikes = DependencyResolver.Instance.PublicationLogic.GetCountLikesByPublciationId(PageData["Publication"].Id);
+}
+
+<style>
+    .clicked-like {
+        color: red;
+    }
+</style>
+
+<div style="height: 50%" class="overflow-auto p-2">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>@PageData["Publication"].Title</h2>
+        <div>
+            <button id="post-like" class="btn p-0 @classLike"><i data-feather="heart"></i></button>
+            <span>@countPublcaitonLikes</span>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (PageData["authUser"].Role == 1 || PageData["PublicationAuthor"].Username == PageData["authUser"].Username)
+                {
+                    <form style="display: inline" action="~/Actions/DeletePublication.cshtml" method="post">
+                        <input style="display: none" type="text" name="PublicationId" value="@PageData["Publication"].Id" />
+                        <button class="btn-outline-danger btn p-1"><i data-feather="trash-2"></i></button>
+                    </form>
+                }
+            }
+
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center d-inline-block align-text-top">
+        <a class="navbar-brand d-flex align-items-center text-dark"
+           href="~/Pages/Profile?user=@PageData["PublicationAuthor"].Username">
+            <img class="rounded-circle me-1"
+                 src="../@PageData["PublicationAuthor"].Image"
+                 alt=""
+                 width="30"
+                 height="30" />
+            <span>@PageData["PublicationAuthor"].Username</span>
+        </a>
+        <i>@PageData["Publication"].DateOfCreation</i>
+    </div>
+    <p>
+        @PageData["Publication"].Description
+    </p>
+    <hr />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form action="~/Actions/CreateComment" method="post">
+            <b>Write comment:</b>
+            <textarea class="p-2" type="text" name="CommentBody" style="width: 100%" required value=""></textarea>
+            <input style="display: none" type="text" name="PublicationId" value="@PageData["Publication"].Id" />
+            <input id="userIdInput" style="display: none" type="text" name="UserId" value="@PageData["authUser"].Id" />
+            <button class="btn btn-dark" style="width: 100%" type="submit">Send</button>
+        </form>
+    }
+    else
+    {
+        <b>Authenticate to write comment:</b>
+        <textarea disabled type="text" name="CommentBody" style="width: 100%" value=""></textarea>
+        <button disabled class="btn btn-dark" style="width: 100%">Send</button>
+    }
+</div>
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script>
+    const params = (new URL(document.location)).searchParams
+    const postLikeBtn = document.querySelector('#post-like')
+    const userId = document.querySelector('#userIdInput').value;
+    postLikeBtn.addEventListener('click', () => {
+        postLikeBtn.classList.toggle('clicked-like');
+        const data = JSON.stringify();
+        $.ajax({
+            type: "POST",
+            url: '/Actions/LikePublication.cshtml',
+            data: {
+                UserId: userId,
+                PublicationId: params.get('post')
+            }
+        });
+    });
+</script>

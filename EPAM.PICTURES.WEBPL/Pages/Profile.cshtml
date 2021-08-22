@@ -1,0 +1,81 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@{
+    Layout = "~/Layouts/_BasicLayout.cshtml";
+    int rowsOnPage = 3;
+    int colsInRow = 3;
+    int idx = 0;
+    Publication[] publications = null;
+    try
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            int id = 0;
+            Int32.TryParse(User.Identity.Name, out id);
+            PageData["authUser"] = DependencyResolver.Instance.UserLogic.GetUserById(id);
+        }
+
+        string username = Request.Params["user"];
+        PageData["pageName"] = "Profile " + Request.Params["user"];
+        PageData["profileUser"] = DependencyResolver.Instance.UserLogic.GetUserByUsername(username);
+
+        var publicationsOnPage = DependencyResolver.Instance.PublicationLogic.GeAllPublicationsByUserId(PageData["profileUser"].Id);
+        publications = (new List<Publication>(publicationsOnPage)).ToArray();
+    }
+    catch(Exception e)
+    {
+        Response.Redirect("/Error?msg=" + e.Message);
+    }
+}
+
+@section Style {
+    <style>
+        p {
+            text-align: justify;
+        }
+    </style>
+    <link href="~/Content/CSS/Home.css" rel="stylesheet" />
+}
+
+@section Header {
+    @RenderPage("~/Particals/_Header.cshtml")
+}
+
+<main>
+    <div class="container p-5">
+        @RenderPage("~/Particals/_ProfileInfo.cshtml")
+        <hr />
+        <div>
+            <div class="mt-4 container-fluid d-grid gap-4">
+                @for (int i = 0; i < rowsOnPage; i++)
+                {
+                    <div class="row">
+                        @for (int j = 0; j < colsInRow; j++)
+                        {
+                            if (idx > publications.Length - 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                PageData["Publication"] = publications[idx];
+                                <div class="col">
+                                    @RenderPage("~/Particals/_PostCard.cshtml")
+                                </div>
+                                idx += 1;
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            @RenderPage("~/Particals/_AddNewPostButton.cshtml")
+
+        }
+        @RenderPage("~/Particals/_AddNewPostModal.cshtml")
+    </div>
+
+</main>

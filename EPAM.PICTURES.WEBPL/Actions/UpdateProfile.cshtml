@@ -1,0 +1,43 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@using System.Threading
+
+@{
+    try
+    {
+        var authUser = DependencyResolver.Instance.UserLogic.GetUserByUsername(Request["OldUsername"]);
+        var imgPath = authUser.Image;
+        var fileImage = Request.Files["Image"];
+
+        if (fileImage.ContentLength > 0)
+        {
+            if (authUser.Image != fileImage.FileName)
+            {
+                imgPath = DependencyResolver.Instance.FileSaverLogic.Save(fileImage);
+            }
+        }
+
+        var newUserData = new User(
+            Request["Name"],
+            Request["Surname"],
+            authUser.Email,
+            Request["Username"],
+            Request["Password"],
+            authUser.Role,
+            DateTime.Parse(Request["DateOfBirth"]),
+            authUser.RegistrationDate,
+            imgPath
+        );
+        DependencyResolver.Instance.UserLogic.UpdateUserByUsername(authUser.Username, newUserData);
+        Response.Redirect("~Pages/Profile?username=" + Request["Username"]);
+    }
+    catch (ThreadAbortException e)
+    {
+        // Do nothing
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("../Pages/Error?msg=" + e.Message, false);
+    }
+
+}

@@ -1,0 +1,70 @@
+﻿<div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Publication</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="~/Actions/CreatePublication.cshtml" enctype='multipart/form-data' method="post" id="addNewPostForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Title</label>
+                        <input name="Title" type="text" class="form-control" required>
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="Description" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Tags</label>
+                        <div id="newPostTags" class="mb-3">
+                        </div>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping">#</span>
+                            <input id="tagInput" type="text"  class="form-control"  aria-describedby="addon-wrapping">
+                            <input id="allTagsInput" type="text" name="Tags" value="" style="display: none" />
+                        </div>
+                        <div id="emailHelp" class="form-text">Press enter to add tag.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Your image</label>
+                        <input name="Image" required class="form-control" type="file" >
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark"">Publicate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const addNewPostForm = document.getElementById('addNewPostForm');
+    const allTagsInput = document.getElementById('allTagsInput');
+    const tagInput = document.getElementById('tagInput');
+    const newPostTags = document.getElementById('newPostTags')
+
+    addNewPostForm.addEventListener('keydown', (e) => {
+        if (e.code === 'Enter') {
+            e.preventDefault();
+        }
+    })
+
+    tagInput.addEventListener('keydown', (e) => {
+        if (e.code === 'Enter' && e.target.value !== '') {
+            allTagsInput.value += e.target.value + ' ';
+            newPostTags.insertAdjacentHTML('afterBegin', `
+               <span class="newTag badge bg-primary">#${e.target.value}</span>
+            `);
+            e.target.value = '';
+        }
+    })
+    newPostTags.addEventListener('click', (e) => {
+        if (e.target.classList.contains('newTag')) {
+            e.target.remove();
+        }
+    })
+</script>

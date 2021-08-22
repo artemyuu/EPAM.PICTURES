@@ -1,0 +1,74 @@
+﻿@using System.Globalization
+@{
+    CultureInfo provider = CultureInfo.InvariantCulture;
+    string date = "30.07.2021 0:00:00";
+    string formate = "dd.MM.yyyy h:mm:ss";
+    var newDate = DateTime.ParseExact(date, formate, provider);
+}
+
+<div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="~/Actions/UpdateProfile.cshtml" enctype='multipart/form-data' method="post">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text"
+                               required
+                               class="form-control"
+                               name="Username"
+                               value="@PageData["authUser"].Username" />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password"
+                               class="form-control"
+                               name="Password"
+                               required
+                               value="@PageData["authUser"].Password" />
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text"
+                               class="form-control"
+                               name="Name"
+                               required
+                               value="@PageData["authUser"].Name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Surname</label>
+                        <input type="text"
+                               class="form-control"
+                               name="Surname"
+                               required
+                               value="@PageData["authUser"].Surname" />
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date"
+                               class="form-control"
+                               name="DateOfBirth"
+                               required
+                               value="@newDate.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="form-group">
+                        <label>Your image</label>
+                        <input name="Image" required class="form-control" type="file">
+
+                    </div>
+                    <input style="display: none" name="OldUsername" class="form-control" type="text" value="@PageData["authUser"].Username">
+                    <button style="height: 3.5em"
+                            type="submit"
+                            class="btn mt-3 w-100 btn-dark">
+                        Edit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

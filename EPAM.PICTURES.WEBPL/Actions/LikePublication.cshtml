@@ -1,0 +1,28 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using System.Threading
+@{
+    try
+    {
+        int PublicationId = 0;
+        int UserId = 0;
+        Int32.TryParse(Request["PublicationId"], out PublicationId);
+        Int32.TryParse(Request["UserId"], out UserId);
+        if (DependencyResolver.Instance.PublicationLogic.CheckLikePublication(PublicationId, UserId))
+        {
+            DependencyResolver.Instance.PublicationLogic.DeleteLikePublication(PublicationId, UserId);
+        }
+        else
+        {
+            DependencyResolver.Instance.PublicationLogic.AddLikePublication(PublicationId, UserId);
+        }
+    }
+    catch (ThreadAbortException e)
+    {
+        // Do nothing
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("../Pages/Error?msg=" + e.Message, false);
+    }
+
+}

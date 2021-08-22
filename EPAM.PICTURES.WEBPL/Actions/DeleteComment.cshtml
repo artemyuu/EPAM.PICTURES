@@ -1,0 +1,24 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@using System.Threading
+@{
+    try
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            int commentId = 0;
+            Int32.TryParse(Request["CommentId"], out commentId);
+            DependencyResolver.Instance.CommentLogic.DeleteCommentById(commentId);
+        }
+        Response.Redirect("/");
+    }
+    catch (ThreadAbortException e)
+    {
+        // Do nothing
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("../Pages/Error?msg=" + e.Message, false);
+    }
+}
+

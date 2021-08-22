@@ -1,0 +1,17 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@{ 
+    int countPublcaitonLikes = DependencyResolver.Instance.PublicationLogic.GetCountLikesByPublciationId(PageData["Publication"].Id);
+    int countPulicationCommenst = DependencyResolver.Instance.CommentLogic.GetCountCommenstByPublicationId(PageData["Publication"].Id);
+}
+<a href="~/Pages/Post?post=@PageData["Publication"].Id">
+    <div class="card bg-dark text-white">
+        <img src="../@PageData["Publication"].Image" class="card-img">
+        <div class="card-img-overlay d-flex flex-column justify-content-between">
+            <h5 class="card-title fs-1">@PageData["Publication"].Title</h5>
+            <div class="d-flex justify-content-between">
+                <span>@countPublcaitonLikes <i data-feather="heart"></i></span>
+                <span>@countPulicationCommenst <i data-feather="message-circle"></i></span>
+            </div>
+        </div>
+    </div>
+</a>

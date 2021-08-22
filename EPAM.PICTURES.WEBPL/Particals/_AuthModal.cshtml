@@ -1,0 +1,34 @@
+﻿<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Authorisation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="~/Actions/AuthUser.cshtml" method="post">
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email"
+                                   class="form-control"
+                                   aria-describedby="emailHelp" 
+                                   name="Email"/>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label >Password</label>
+                            <input type="password"
+                                   class="form-control" 
+                                   name="Password"/>
+                        </div>
+                        <a href="" data-bs-toggle="modal" data-bs-target="#registrationModal">Registration</a>
+                        <button style="height: 3.5em"
+                                type="submit"
+                                class="btn mt-3 w-100 btn-dark">
+                            Sign In
+                        </button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>

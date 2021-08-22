@@ -1,0 +1,22 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using System.Threading
+
+@{
+    try
+    {
+        var authUser = DependencyResolver.Instance.UserLogic.Authentication(Request["Email"], Request["Password"]);
+        if (authUser != null)
+        {
+            FormsAuthentication.SetAuthCookie(authUser.Id.ToString(), createPersistentCookie: true);
+            Response.Redirect("/");
+        }
+    }
+    catch (ThreadAbortException e)
+    {
+        // Do nothing
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("../Pages/Error?msg=" + e.Message, false);
+    }
+}

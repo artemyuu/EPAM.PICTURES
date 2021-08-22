@@ -1,0 +1,35 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@using EPAM.PICTURES.ENTITIES
+@using System.Threading
+
+@{
+    try
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            int id = 0;
+            int publicationId = 0;
+            Int32.TryParse(User.Identity.Name, out id);
+            Int32.TryParse(Request["PublicationId"], out publicationId);
+            PageData["authUser"] = DependencyResolver.Instance.UserLogic.GetUserById(id);
+            DependencyResolver.Instance.CommentLogic.CreateComment(
+            new Comment(
+                publicationId,
+                id,
+                DateTime.Now,
+                Request["CommentBody"]
+                )
+           );
+        }
+        Response.Redirect("/");
+    }
+    catch (ThreadAbortException e)
+    {
+        // Do nothing
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("../Pages/Error?msg=" + e.Message, false);
+    }
+
+}

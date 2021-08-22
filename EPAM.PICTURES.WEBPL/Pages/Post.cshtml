@@ -1,0 +1,73 @@
+﻿@using EPAM.PICTURES.DEPENDENCIES
+@{
+    Layout = "~/Layouts/_BasicLayout.cshtml";
+    PageData["pageName"] = "Post";
+    try
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            int id = 0;
+            Int32.TryParse(User.Identity.Name, out id);
+            PageData["authUser"] = DependencyResolver.Instance.UserLogic.GetUserById(id);
+        }
+
+        int publicationId = 0;
+        Int32.TryParse(Request.Params["post"], out publicationId);
+
+        PageData["Publication"] = DependencyResolver.Instance.PublicationLogic.GetPublicationById(publicationId);
+        PageData["PublicationAuthor"] = DependencyResolver.Instance.UserLogic.GetUserById(PageData["Publication"].UserId);
+        PageData["pageName"] = "Publication:  " + PageData["Publication"].Title;
+    }
+    catch (Exception e)
+    {
+        Response.Redirect("/Error?msg=" + e.Message);
+    }
+
+
+}
+
+@section Header {
+    @RenderPage("~/Particals/_Header.cshtml")
+}
+
+<main>
+    <div class="container-fluid mt-5 w-100 vh-100 d-flex justify-content-center">
+        <div style="
+            background: url('../@PageData["Publication"].Image');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 70%;
+            width: 40%;
+          "></div>
+        <div style="height: 70%; width: 40%" class="border p-2">
+            @RenderPage("~/Particals/_Post.cshtml")
+            <div class="container-fluid d-flex flex-column overflow-auto"
+                 style="height: 50%">
+                @try
+                {
+                    foreach (var comment in DependencyResolver.Instance.CommentLogic.GetAllCommentsByPublicationId(PageData["Publication"].Id))
+                    {
+                        PageData["Comment"] = comment;
+                        PageData["CommentAuthor"] = DependencyResolver.Instance.UserLogic.GetUserById(PageData["Comment"].UserId);
+                        @RenderPage("~/Particals/_Comment.cshtml")
+                    }
+                }
+                catch(Exception e)
+                {
+                    Response.Redirect("/Error?msg=" + e.Message);
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @RenderPage("~/Particals/_AddNewPostButton.cshtml")
+
+    }
+    @RenderPage("~/Particals/_AddNewPostModal.cshtml")
+    @RenderPage("~/Particals/_AuthModal.cshtml")
+    @RenderPage("~/Particals/_RegistrationModal.cshtml")
+</main>
+
