@@ -1,0 +1,4 @@
+﻿CREATE PROCEDURE [dbo].[GetAllTags]
+AS
+	SELECT Id, Title FROM Tags 
+RETURN 0
